@@ -1,0 +1,74 @@
+.container{
+    padding: 20px 0;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+.top button{
+    background-color: #000;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+}
+.featuredImg{
+    width: 100%;
+    position: relative;
+    height: 600px;
+}
+.featuredImg img{
+    object-fit: cover;
+}
+.photoText{
+    width: 200px;
+    padding: 12px 16px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.about{
+    display: flex;
+    justify-content: space-between;
+    color: #656565;
+    padding-top: 30px;
+    line-height: 1.5;
+}
+.about h3{
+    color: #000;
+}
+.description{
+    max-width: 700px;
+    
+}
+.recommendationImgs{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.recommendation{
+    text-align: right;
+}
+.recImg{
+    position: relative;
+    width: 100px;
+    height: 120px;
+}
+.recImg img{
+    object-fit: cover;
+}
+.recImg:not(:first-child){
+    margin-left: 12px;
+}
+.recommendation p{
+    margin-top: 6px;
+}
