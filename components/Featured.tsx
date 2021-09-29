@@ -17,6 +17,10 @@ const Featured:React.FC = () => {
                     </div>
                 </div>
 
+                <div className={styles.btnMobile}>
+                    <button>ADD TO CART</button>
+                </div>
+
                 <div className={styles.about}>
                     <div className={styles.description}>
                         <h3>About the Samurai King resting</h3>

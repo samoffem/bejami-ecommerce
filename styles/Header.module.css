@@ -2,8 +2,12 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding-bottom: 15px;
+   padding: 10px 0;
    border-bottom: 3px solid #e4e4e4;
+   position: sticky;
+   top: 0;
+   background-color: #fff;
+   z-index: 5;
 
 }
 .cart{
@@ -12,12 +16,12 @@
 }
 
 .cartCounter{
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
     background-color: black;
     color: #fff;
     position: absolute;
-    bottom: -10px;
+    bottom: -6px;
     right: -10px;
     display: flex;
     justify-content: center;

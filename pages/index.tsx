@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Featured from '../components/Featured'
 import Header from '../components/header'
+import ProductsList from '../components/ProductsList'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <div className={styles.content}>
         <Header />
         <Featured />
+        <ProductsList />
       </div>
 
     </div>
