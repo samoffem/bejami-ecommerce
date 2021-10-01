@@ -34,10 +34,10 @@
     justify-content: space-between;
     align-items: center;
 }
-.icon svg{
+.icon span:first-child{
     cursor: pointer;
 }
-.icon span{
+.icon span:last-child{
     margin-left: 6px;
 }
 
@@ -84,6 +84,14 @@
     font-size: 20px;
     font-weight: 700;
     display: none;
+}
+.bestSellerTag{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background-color: #fff;
+    
 }
 .productImg:hover .addToCart{
     display: block;

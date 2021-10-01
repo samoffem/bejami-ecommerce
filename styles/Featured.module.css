@@ -33,6 +33,7 @@
     width: 100%;
     position: relative;
     height: 600px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
 .featuredImg img{
     object-fit: cover;
@@ -63,8 +64,11 @@
 }
 .description{
     max-width: 700px;
-    
 }
+.description h4{
+    margin: 8px 0;
+}
+
 .recommendationImgs{
     display: flex;
     justify-content: space-between;
@@ -73,6 +77,7 @@
 .recommendation{
     text-align: right;
     margin-left: 10px;
+    padding-top: 15px;
 }
 .recImg{
     position: relative;

@@ -1,13 +1,18 @@
 .container{
+    position: sticky;
+    top: 0;
+    z-index: 4;
+}
+.wrapper{
    display: flex;
    justify-content: space-between;
    align-items: center;
    padding: 10px 0;
    border-bottom: 3px solid #e4e4e4;
-   position: sticky;
-   top: 0;
+  
    background-color: #fff;
-   z-index: 5;
+  
+
 
 }
 .cart{
@@ -28,3 +33,59 @@
     align-items: center;
     font-size: 12px;
 }
+.cartItems{
+    width: 400px;
+    background-color: #fff;
+    position: absolute;
+    z-index: 5;
+    right: 0;
+    box-shadow: 1px 2px 2px rgba(0,0,0,0.5);
+}
+.cartEmpty{
+    text-align: center;
+    padding: 30px
+}
+.cartItemsWrap{
+    padding: 10px 20px;
+}
+.close{
+   display:flex;
+   justify-content: flex-end;
+   margin-bottom: 20px;
+}
+.close span{
+    cursor: pointer;
+}
+.cartItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #c2c2c2;
+}
+.left h5{
+    font-size: 16px;
+}
+.left p{
+    color: #656565;
+    font-size: 23px;
+    margin-top: 8px;
+}
+.right{
+    position: relative;
+    
+}
+.cartItemsWrap button{
+    margin-top: 15px;
+    width: 100%;
+    padding: 15px 10px;
+    background: none;
+    border: 2px solid #000;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 575.98px){
+    .cartItems{
+        width: 300px;
+    }
+  }

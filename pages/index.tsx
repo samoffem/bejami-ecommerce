@@ -1,10 +1,115 @@
 import Head from 'next/head'
 import Featured from '../components/Featured'
-import Header from '../components/header'
+import Header from '../components/Header'
 import ProductsList from '../components/ProductsList'
 import styles from '../styles/Home.module.css'
+import { Products } from '../Data/Products'
+import { GetServerSideProps } from 'next'
+import { useContext, useEffect, useState } from 'react'
+import {Store} from '../utils/Store'
+import { ProductInterface } from '../Data/Interface'
 
-export default function Home() {
+
+interface HomeProps{
+  products: ProductInterface[]
+}
+export default function Home({products}: HomeProps) {
+  const {cartState, cartDispatch} = useContext(Store)
+  const [prod, setProd] = useState<ProductInterface[]>([])
+  const [prodList, setProdList] = useState<ProductInterface[]>([])
+  const [order, setOrder] = useState<string>('ascending')
+  const [currentPage, setCurrentPage] = useState<number>(1)
+
+  const featured = products.find(product=>product.featured === true)
+
+  const productChangeByCategory = (e)=>{
+   
+    if(e.target.checked){
+      let filtered = products.filter((item)=> item.category === e.target.value)
+      setProdList(prev=>[...prev, ...filtered])
+    }else{
+      setProdList(prev=> prev.filter(item=>item.category !== e.target.value))
+    }
+    
+  }
+
+  const productChangeByPrice = (e)=>{
+    if(e.target.checked && e.target.value === 'lower than $20'){
+      // if(prodList.length === 0){
+      //   let filtered = products.filter(item=> item.price < 20)
+      //   setProdList(filtered)
+      // } 
+    }
+
+    console.log(prodList)
+  }
+
+  const sortProduct = (target)=>{
+    let sortArray = [...prod]
+    if(target.value === 'alphabetically' && order === 'ascending'){
+      sortArray.sort((a, b)=>{
+          let nameA = a.name.toUpperCase()
+          let nameB = b.name.toUpperCase()
+
+          if(nameA < nameB){
+            return -1
+          }
+          if(nameA > nameB){
+            return 1
+          }
+          return 0
+      })
+
+      setProd(sortArray)
+    }else if(target.value === 'alphabetically' && order === 'descending'){
+      sortArray.sort((a, b)=>{
+        let nameA = a.name.toUpperCase()
+        let nameB = b.name.toUpperCase()
+
+        if(nameA > nameB){
+          return -1
+        }
+        if(nameA < nameB){
+          return 1
+        }
+        return 0
+    })
+
+    setProd(sortArray)
+    }
+    if(target.value === 'price' && order === 'ascending'){
+      sortArray.sort((a,b)=>{
+        return a.price - b.price
+      })
+      setProd(sortArray)
+    }else if(target.value === 'price' && order === 'descending'){
+      sortArray.sort((a,b)=>{
+        return b.price - a.price
+      })
+      setProd(sortArray)
+    }
+  }
+ 
+  useEffect(()=>{
+    if(prodList.length === 0){
+      setProd(products)
+    }else{
+      setProd(prodList)
+    }
+    
+  }, [prodList])
+  
+  //implements Pagination
+
+  const indexOfLastProduct = currentPage * 6;
+  const indexOfFirstProduct = indexOfLastProduct - 6
+  const currentProducts:ProductInterface[] = prod.slice(indexOfFirstProduct, indexOfLastProduct)
+
+  const paginate = (num: number)=>{
+    setCurrentPage(num)
+  }
+
+  console.log(currentProducts)
   return (
     <div className={styles.container}>
       <Head>
@@ -15,10 +120,43 @@ export default function Home() {
 
       <div className={styles.content}>
         <Header />
-        <Featured />
-        <ProductsList />
+        <Featured featured={featured} />
+        <ProductsList 
+         products = {currentProducts} handleCategoryChange={productChangeByCategory} 
+         handlePriceChange={productChangeByPrice} 
+         handleSort={sortProduct} 
+         setOrder = {setOrder}
+         />
+
+         <div className={styles.pagination}>
+           <div className={styles.paginationWrap}>
+              {currentPage > 1 &&
+              <span onClick={()=>setCurrentPage(currentPage -1)} className={styles.backArrow}>
+                <svg width="13" height="20" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 2L3 10L11 18" stroke="black" strokeWidth="3"/>
+                </svg>
+              </span>}
+             {[...Array(Math.ceil(prod.length/6))].map((itm, ind)=>(
+                <span onClick={()=>paginate(ind+1)} className={`${styles.pageNum} ${currentPage === ind+1? styles.active:''}`} key={ind}>{ind+1}</span>
+             ))}
+              {currentPage < Math.ceil(prod.length/6) &&
+              <span onClick={()=>setCurrentPage(currentPage +1)} className={styles.frontArrow}>
+                <svg width="13" height="20" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 2L10 10L2 18" stroke="black" strokeWidth="3"/>
+                </svg>
+              </span>}
+           </div>
+         </div>
       </div>
 
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx)=>{
+  return{
+    props: {
+      products: Products
+    }
+  }
 }

@@ -4,6 +4,24 @@
  margin: 0 auto;
 }
 
+.paginationWrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b4b4b4;
+  font-size: 30px;
+}
+.paginationWrap span{
+  cursor: pointer;
+  padding: 10px;
+}
+.pageNum{
+  
+}
+.pageNum.active{
+  color: #000;
+}
+
 @media screen and (max-width: 991px) {
   .container{
     padding: 0 20px 30px;
